@@ -20,8 +20,6 @@ import sqlite3
 
 addon_id = 'plugin.video.home.2.0'
 
-
->>>>>>> fac9e34e79f9cdd3756d2acdb16cf2d3b1cec2e2
 conn = sqlite3.connect(xbmc.translatePath(os.path.join('special://home/addons/' + addon_id, 'emasti_database.db')))
 
 c = conn.cursor()

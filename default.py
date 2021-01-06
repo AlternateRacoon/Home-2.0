@@ -23,7 +23,6 @@ icon = xbmc.translatePath(os.path.join('special://home/addons/' + addon_id, 'ico
 args = urlparse.parse_qs(sys.argv[2][1:])
 
 
-<<<<<<< HEAD
 def addDir(name, url, mode, iconimage, description, fanart):
     u = sys.argv[0] + "?url=" + urllib.quote_plus(url) + "&mode=" + str(mode) + "&name=" + urllib.quote_plus(
         name) + "&description=" + str(description)
@@ -85,7 +84,6 @@ def getusersearch_channel():
         return
         mode = args.get('mode', None)
 
-<<<<<<< HEAD
 def INDEX():
 
     addDir('Movies Search', 'url', 2, '', '', fanart)
@@ -102,7 +100,6 @@ def latest():
     addDir('Latest T.V Shows', 'url', 9, '', '', fanart)
 
     addDir('Latest Kids Movies', 'url', 11, '', '', fanart)
-=======
 
 def INDEX():
     addDir('All Channels', 'url', 3, '', '', fanart)
@@ -112,7 +109,6 @@ def INDEX():
     addDir('Latest Movies', 'url', 6, '', '', fanart)
 
     addDir('Channels Search', 'url', 4, '', '', fanart)
->>>>>>> fac9e34e79f9cdd3756d2acdb16cf2d3b1cec2e2
 
 
 def emasti_movie_search(url):
@@ -139,7 +135,6 @@ def channel_search(url):
         else:
             pass
 
-<<<<<<< HEAD
 
 def load_another_page(url):
     html_data = urllib.urlopen(url).read().decode("utf8")
@@ -171,7 +166,6 @@ def load_another_page(url):
     else:
         addDir('Next Page', 'http://www.dmasti.pk/movies/index/' + str(index_number), 7, icon, '', fanart)
 
-=======
 def load_another_page(url):
     html_data = urllib.urlopen(url).read().decode("utf-8")
     movies_links = re.findall('<a class="poster" href="(.*?)">', html_data)
@@ -231,8 +225,6 @@ def get_params():
     return param
 
 
-<<<<<<< HEAD
-=======
 def addDir(name, url, mode, iconimage, description, fanart):
     u = sys.argv[0] + "?url=" + urllib.quote_plus(url) + "&mode=" + str(mode) + "&name=" + urllib.quote_plus(
         name) + "&description=" + str(description)
