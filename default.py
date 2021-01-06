@@ -1,4 +1,3 @@
-import emastiwebtv
 import os
 import re
 import sys
@@ -101,15 +100,6 @@ def latest():
 
     addDir('Latest Kids Movies', 'url', 11, '', '', fanart)
 
-def INDEX():
-    addDir('All Channels', 'url', 3, '', '', fanart)
-
-    addDir('Movies Search', 'url', 2, '', '', fanart)
-
-    addDir('Latest Movies', 'url', 6, '', '', fanart)
-
-    addDir('Channels Search', 'url', 4, '', '', fanart)
-
 
 def emasti_movie_search(url):
     get_user_input = getusersearch()
@@ -166,20 +156,6 @@ def load_another_page(url):
     else:
         addDir('Next Page', 'http://www.dmasti.pk/movies/index/' + str(index_number), 7, icon, '', fanart)
 
-def load_another_page(url):
-    html_data = urllib.urlopen(url).read().decode("utf-8")
-    movies_links = re.findall('<a class="poster" href="(.*?)">', html_data)
-    movie_posters = re.findall('<img src="(.*?)" alt="', html_data)
-    movie_names = re.findall('<h1>(.*?)</h1><span>', html_data)
-    url1 = url
-
-    for row in range(len(movie_posters)):
-        addDir(movie_names[row], movies_links[row], 8, movie_posters[row], '', fanart)
-    url1 += "code1245"
-    index_number = re.findall('/index/(.*?)code1245', url1)
-    index_number = int(index_number[0])
-    index_number += index_number
-    addDir('Next Page', 'http://www.dmasti.pk/movies/index/' + str(index_number), 7, icon, '', fanart)
 
 def load_mp4_link(url):
     html_data_movies = urllib.urlopen(url).read().decode("utf8")
@@ -187,13 +163,14 @@ def load_mp4_link(url):
     title = re.findall('<title>(.*?) DMasti.Pk</title>', html_data_movies)[0].replace("|", "")
     addLink(title, mp4_link, 1, '', '', fanart)
 
-    addLink('Movie', mp4_link, 1, '', '', fanart)
+
 def PLAYLINK(name, url):
     ok = True
     liz = xbmcgui.ListItem(name, iconImage=icon, thumbnailImage=icon);
     liz.setInfo(type="Video", infoLabels={"Title": name})
     ok = xbmcplugin.addDirectoryItem(handle=int(sys.argv[1]), url=url, listitem=liz)
     xbmc.Player().play(url, liz, False)
+
 
 def get_params():
     param = []
@@ -223,39 +200,6 @@ def get_params():
                 param[splitparams[0]] = splitparams[1]
 
     return param
-
-
-def addDir(name, url, mode, iconimage, description, fanart):
-    u = sys.argv[0] + "?url=" + urllib.quote_plus(url) + "&mode=" + str(mode) + "&name=" + urllib.quote_plus(
-        name) + "&description=" + str(description)
-
-    ok = True
-
-    liz = xbmcgui.ListItem(name, iconImage="DefaultFolder.png", thumbnailImage=iconimage)
-
-    liz.setInfo(type="Video", infoLabels={"Title": name, 'plot': description})
-
-    liz.setProperty('fanart_image', fanart)
-
-    ok = xbmcplugin.addDirectoryItem(handle=int(sys.argv[1]), url=u, listitem=liz, isFolder=True)
-
-    return ok
-
-
-def addLink(name, url, mode, iconimage, description, fanart):
-    u = sys.argv[0] + "?url=" + urllib.quote_plus(url) + "&mode=" + str(mode) + "&name=" + urllib.quote_plus(name) + "&description=" + str(description)
-
-    ok = True
-
-    liz = xbmcgui.ListItem(name, iconImage="DefaultFolder.png", thumbnailImage=iconimage)
-
-    liz.setInfo(type="Video", infoLabels={"Title": name, 'plot': description})
-
-    liz.setProperty('fanart_image', fanart)
-
-    ok = xbmcplugin.addDirectoryItem(handle=int(sys.argv[1]), url=u, listitem=liz, isFolder=False)
-
-    return ok
 
 
 params = get_params();
